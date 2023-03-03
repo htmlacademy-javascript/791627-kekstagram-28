@@ -1,10 +1,9 @@
 const PHOTO_COUNT = 25;
 const AVATAR_COUNT = 6;
-const COMMENT_COUNT = 100;
+const COMMENT_ID_COUNT = 100;
 const COMMENTS_COUNT = 3;
 const DESCRIPTION = 'Потрясающее фото';
 const URL_PHOTO = 'photos/';
-const URL_PHOTO_COUNT = 25;
 const LIKE_COUNT = 300;
 
 const NAMES = [
@@ -68,9 +67,10 @@ const createRandomIdFromRangeGenerator = (min, max) => {
   };
 };
 
+const createCommentId = createRandomIdFromRangeGenerator(1, COMMENT_ID_COUNT);
+
 const createComments = () => {
   const randomMessageIndex = getRandomInteger(0, MESSAGE.length - 1);
-  const createCommentId = createRandomIdFromRangeGenerator(1, COMMENT_COUNT);
 
   return {
     id: createCommentId(),
@@ -80,14 +80,12 @@ const createComments = () => {
   };
 };
 
-const createPhotoCard = () => {
-  const createPhotoId = createRandomIdFromRangeGenerator(1, PHOTO_COUNT);
+const createPhotoCard = (index) => {
   const randomLikes = getRandomInteger(1, LIKE_COUNT);
-  const createUrlId = createRandomIdFromRangeGenerator(1, URL_PHOTO_COUNT);
 
   return {
-    id: createPhotoId(),
-    url: `${URL_PHOTO}${createUrlId()}.jpg`,
+    id: index + 1,
+    url: `${URL_PHOTO}${index + 1}.jpg`,
     description: DESCRIPTION,
     likes: randomLikes,
     comments: Array.from({length: COMMENTS_COUNT}, createComments)
@@ -95,7 +93,13 @@ const createPhotoCard = () => {
 };
 
 function generatePhotos (count) {
-  return Array.from({length: count}, createPhotoCard);
+  const result = [];
+
+  for (let i = 0; i < count; i++) {
+    result.push(createPhotoCard(i));
+  }
+
+  return result;
 }
 
 generatePhotos(PHOTO_COUNT);
