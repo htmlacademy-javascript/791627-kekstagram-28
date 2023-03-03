@@ -1,6 +1,6 @@
 //Проверка длины строки
 function isValidLength(string, maxLength) {
-  return (string.length) <= maxLength ? 'строка проходит по длине' : 'строка не проходит по длине';
+  return string.length <= maxLength;
 }
 
 isValidLength('проверяемая строка', 20);
@@ -10,13 +10,9 @@ isValidLength('проверяемая строка', 20);
 function isPalindrome(string) {
 
   const noSpaceString = string.replaceAll(' ', '');
-  let reverseString = '';
+  const reverseString = noSpaceString.split('').reverse().join('');
 
-  for (let i = noSpaceString.length - 1; i >= 0; i--) {
-    reverseString += noSpaceString[i];
-  }
-
-  return reverseString.toLowerCase() === noSpaceString.toLowerCase() ? 'строка является палиндромом' : 'строка не является палиндромом';
+  return reverseString.toLowerCase() === noSpaceString.toLowerCase();
 }
 
 isPalindrome('Лёша на полке клопа нашёл ');
