@@ -2,7 +2,7 @@ import {getRandomInteger} from './util.js';
 
 const PHOTO_COUNT = 25;
 const AVATAR_COUNT = 6;
-const COMMENTS_COUNT = 3;
+const COMMENTS_VALUE = 10;
 const URL_PHOTO = 'photos/';
 const LIKE_VALUE = 300;
 const DESCRIPTION = 'Потрясающее фото';
@@ -84,7 +84,7 @@ const createPhotoCard = (index) => {
     url: `${URL_PHOTO}${index + 1}.jpg`,
     description: DESCRIPTION,
     likes: randomLikes,
-    comments: generateComment(COMMENTS_COUNT)
+    comments: generateComment(getRandomInteger(1, COMMENTS_VALUE))
   };
 };
 
