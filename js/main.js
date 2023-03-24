@@ -1,5 +1,5 @@
 import {generatePhotos} from './data.js';
 import {PHOTO_COUNT} from './data.js';
-import { renderSmallPictures } from './smallPhotos.js';
+import { renderSmallPictures } from './small-pictures.js';
 
 renderSmallPictures(generatePhotos(PHOTO_COUNT));
