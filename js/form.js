@@ -1,5 +1,8 @@
+import { resetScale } from './scale.js';
+import { resetEffects } from './effect.js';
+
 const MAX_HASHTAG_COUNT = 5;
-const VALID_SYMBOL = /^#[a-zа-яё0-9]{1,19}$/i;
+const VALID_HASHTAG_REGEXP = /^#[a-zа-яё0-9]{1,19}$/i;
 const TAG_ERROR_TEXT = 'Неверные хэштеги';
 
 const body = document.querySelector('body');
@@ -24,6 +27,8 @@ const showModal = () => {
 
 const hideModal = () => {
   form.reset();
+  resetScale();
+  resetEffects();
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -50,7 +55,7 @@ const onFileInputChange = () => {
   showModal();
 };
 
-const isValidTag = (tag) => VALID_SYMBOL.test(tag);
+const isValidTag = (tag) => VALID_HASHTAG_REGEXP.test(tag);
 
 const hasValidCount = (tags) => tags.length <= MAX_HASHTAG_COUNT;
 
