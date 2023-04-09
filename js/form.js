@@ -75,13 +75,26 @@ pristine.addValidator(
   TAG_ERROR_TEXT
 );
 
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  if(pristine.validate()) {
-    form.submit();
-  }
+const setOnFormSubmit = (callback) => {
+  form.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+
+    if (isValid) {
+      await callback(new FormData(form));
+    }
+  });
 };
+
+// const onFormSubmit = (evt) => {
+//   evt.preventDefault();
+//   if(pristine.validate()) {
+//     form.submit();
+//   }
+// };
 
 uploadField.addEventListener('change', onFileInputChange);
 uploadCancelButton.addEventListener('click', onCancelButtonClick);
-form.addEventListener('submit', onFormSubmit);
+
+
+export { setOnFormSubmit, hideModal };
