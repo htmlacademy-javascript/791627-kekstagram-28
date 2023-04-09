@@ -12,6 +12,10 @@ const uploadField = document.querySelector('#upload-file');
 const uploadCancelButton = document.querySelector('#upload-cancel');
 const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
+
+const submitButtonDefaultText = 'Опубликовать';
+const submitButtonSendingText = 'Публикация...';
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -75,26 +79,30 @@ pristine.addValidator(
   TAG_ERROR_TEXT
 );
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = submitButtonSendingText;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = submitButtonDefaultText;
+};
+
 const setOnFormSubmit = (callback) => {
   form.addEventListener('submit', async (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
 
     if (isValid) {
+      blockSubmitButton();
       await callback(new FormData(form));
+      unblockSubmitButton();
     }
   });
 };
 
-// const onFormSubmit = (evt) => {
-//   evt.preventDefault();
-//   if(pristine.validate()) {
-//     form.submit();
-//   }
-// };
-
 uploadField.addEventListener('change', onFileInputChange);
 uploadCancelButton.addEventListener('click', onCancelButtonClick);
-
 
 export { setOnFormSubmit, hideModal };
