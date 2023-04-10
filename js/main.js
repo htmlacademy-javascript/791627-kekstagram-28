@@ -4,6 +4,7 @@ import { showAlert, debounce } from './util.js';
 import { showErrorMessage, showSuccessMessage } from './message.js';
 import {setOnFormSubmit, hideModal} from './form.js';
 import { init, getFilterPictures } from './sorting.js';
+import './preload-preview.js';
 
 
 setOnFormSubmit(async (data) => {
