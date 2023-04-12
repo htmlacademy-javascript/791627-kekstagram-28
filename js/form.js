@@ -1,5 +1,6 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
+import { getMessageType } from './message.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG_REGEXP = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -45,7 +46,7 @@ const isTextFieldFocused = () =>
 
 
 function onDocumentEscKeydown(evt) {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+  if (evt.key === 'Escape' && !isTextFieldFocused() && !getMessageType()) {
     evt.preventDefault();
     hideModal();
   }
